@@ -1,0 +1,55 @@
+id: sale
+name: "Продажа авто"
+
+text_template: |-
+  Продаётся {brand} {model}, {year} года.
+  Пробег: {mileage_km} км, КПП: {transmission}, двигатель: {engine} ({horsepower} л.с.).
+  Комплектация: {equipment_summary}.
+  Цена: {price_rub} руб.
+
+required_avito_fields:
+  - category
+  - brand
+  - model
+  - price_rub
+  - city
+  - body_type
+  - drive_type
+  - color
+  - owners
+  - payment_per_month_rub
+
+rules:
+  mileage_km_max: 160000
+  payment_per_month_rub_min: 5000
+  payment_per_month_rub_max: 25000
+  required_equipment_sections:
+    - comfort
+    - interior
+    - security
+    - exterior
+    - assist
+    - visibility
+    - safety
+    - multimedia
+  transmission_allowed:
+    - MT
+    - AT
+    - CVT
+    - AMT
+  description_min_length: 200
+
+validation:
+  checks:
+    - id: required_fields_present
+      description: "Все required_avito_fields присутствуют и заполнены."
+    - id: mileage_within_limit
+      description: "specs.mileage_km <= mileage_km_max."
+    - id: payment_within_range
+      description: "payment_per_month_rub в диапазоне payment_per_month_rub_min..payment_per_month_rub_max."
+    - id: equipment_checklist
+      description: "Все required_equipment_sections присутствуют (минимум пустой массив)."
+    - id: transmission_allowed
+      description: "specs.transmission входит в transmission_allowed."
+    - id: description_length
+      description: "description длиной >= description_min_length."

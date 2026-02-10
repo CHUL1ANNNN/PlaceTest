@@ -1,0 +1,22 @@
+# Local data and logs
+data/
+logs/
+*.log
+
+# Secrets/keys
+*.key
+*.pem
+*.p12
+*.pfx
+*.env
+.env.*
+
+# Cookies/session storage
+cookies/
+*.cookie
+*.cookies
+
+# OS/Editor
+.DS_Store
+.idea/
+.vscode/
